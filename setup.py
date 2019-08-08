@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(name='datascienceutils',
       version='0.1',
-      description='The funniest joke in the world',
+      description='Utility Functions For Data Science',
       url='https://github.com/LeoPAllen/datascienceutils',
       author='Leo Allen',
       author_email='leopallen@gmail.com',
