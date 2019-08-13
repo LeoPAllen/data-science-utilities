@@ -1,5 +1,5 @@
 from sklearn.base import TransformerMixin, BaseEstimator
-import pandas
+import pandas as pd
 
 class FillNA(TransformerMixin, BaseEstimator):
     """Transformation object that fills empty cells in a pandas DataFrame with

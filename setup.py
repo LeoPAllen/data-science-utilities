@@ -8,4 +8,8 @@ setup(name='datascienceutils',
       author_email='leopallen@gmail.com',
       license='MIT',
       packages=['datascienceutils'],
+      install_requires=[
+          'pandas',
+          'sklearn',
+      ],
       zip_safe=False)
