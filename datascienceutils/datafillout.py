@@ -38,8 +38,8 @@ class RecordDrop(TransformerMixin, BaseEstimator):
         """
         df = X.copy()
         n_cols = len(df.columns)
-        fill_rate_s = (df.isnull().astype(int).sum(axis=1)) / n_cols
-        fill_rate_s = fill_rate_s[fill_rate_s < self.fill_proportion]
+        fill_rate_s = (df.notnull().astype(int).sum(axis=1)) / n_cols
+        fill_rate_s = fill_rate_s[fill_rate_s > self.fill_proportion]
         self.records_to_keep_ = list(fill_rate_s.index.values)
 
         return self
@@ -96,11 +96,11 @@ class ColumnDrop(TransformerMixin, BaseEstimator):
         """
         df = X.copy()
         n_rows = len(df)
-        fill_rate_s = (df.isnull().astype(int).sum(axis=0)) / n_rows
-        fill_rate_s = fill_rate_s.rename('empty_rate')
+        fill_rate_s = (df.notnull().astype(int).sum(axis=0)) / n_rows
+        fill_rate_s = fill_rate_s.rename('fillout_rate')
         fr_df = fill_rate_s.to_frame()
         fr_df['theshold'] = fr_df.index.map(self.column_p_map)
-        fr_df['include'] = np.where(fr_df['empty_rate'] < fr_df['theshold'],
+        fr_df['include'] = np.where(fr_df['fillout_rate'] > fr_df['theshold'],
                                     1,
                                     0)
         include_fr_df = fr_df[fr_df['include'] == 1]
