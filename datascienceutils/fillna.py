@@ -1,5 +1,6 @@
-from sklearn.base import TransformerMixin, BaseEstimator
 import pandas as pd
+from sklearn.base import TransformerMixin, BaseEstimator
+
 
 class FillNA(TransformerMixin, BaseEstimator):
     """Transformation object that fills empty cells in a pandas DataFrame with
@@ -80,8 +81,6 @@ class FillNA(TransformerMixin, BaseEstimator):
         pandas.DataFrame
             The input DataFrame with the NA values filled.
         """
-
-
         X = X.copy()
         for column_type in self.fill_vals_.keys():
             for col in self.column_types[column_type]:
